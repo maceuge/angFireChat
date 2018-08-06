@@ -1,47 +1,42 @@
-<div class="row justify-content-center text-light mt-3">
-  <div class="col-12">
-    <h3>FireChat APP</h3>
-    <hr>
-  </div>    
-</div>
-
 <div class="chat">
-  <div class="chat-title">
-    <h1>Eugenio Vorontsov</h1>
-    <h2>CHAT ROOM</h2>
-    <figure class="avatar">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" /></figure>
-  </div>
-  <div class="messages">
-    <div class="messages-content">
+    <div class="chat-title">
+        <h1>Eugenio Vorontsov</h1>
+        <h2>CHAT ROOM</h2>
+        <figure class="avatar">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" /></figure>
+    </div>
+    <div class="messages">
+        <div class="messages-content style-2" id="mensaje-box">
 
-      <div class="message loading new">
+            <!-- <div class="message loading new">
         <figure class="avatar">
           <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" />
         </figure>
         <span></span>
-      </div>
+      </div> -->
 
-      <div class="message new">
+            <!-- <div class="message new">
         <figure class="avatar">
           <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg">
         </figure>
         Hi there, I'm Fabio and you?
         <div class="timestamp">13:22</div>
-      </div>
+      </div> -->
 
-      <div class="message message-personal new">
-        hola
-        <div class="timestamp">13:32</div>
-      </div>
 
+            <div class="message message-personal new mt-3" *ngFor="let chat of _chatService.chats">
+                <div class=""><b>{{ chat.nombre }}</b></div>
+                {{ chat.mensaje }}
+                <div class="timestamp">{{ chat.fecha | date:'shortTime' }}</div>
+            </div>
+
+        </div>
 
     </div>
-  </div>
-  <div class="message-box">
-    <textarea type="text" name="mensaje" [(ngModel)]="mensaje" class="message-input" placeholder="Escribe el Mensaje..."></textarea>
-    <button type="submit" (click)="enviarMensaje()" class="message-submit bg-info">Enviar</button>
-  </div>
+    <div class="message-box">
+        <textarea type="text" name="mensaje" [(ngModel)]="mensaje" class="message-input" placeholder="Escribe el Mensaje..."></textarea>
+        <button type="submit" (click)="enviarMensaje()" class="message-submit bg-info">Enviar</button>
+    </div>
 
 </div>
 <div class=""></div>
