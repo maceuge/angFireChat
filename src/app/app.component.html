@@ -13,5 +13,5 @@
             <app-login *ngIf="!_cs.usuario.uid"></app-login>
         </div>
     </div>
-    <app-chat></app-chat>
+    <app-chat *ngIf="_cs.usuario.uid"></app-chat>
 </div>
