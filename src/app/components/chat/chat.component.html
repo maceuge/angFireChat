@@ -1,9 +1,9 @@
 <div class="chat mt-4">
     <div class="chat-title">
-        <h1>Eugenio Vorontsov</h1>
-        <h2>CHAT ROOM</h2>
+        <h1>{{ _chatService.usuario.nombre }}</h1>
+        <h2>{{ _chatService.usuario.email }}</h2>
         <figure class="avatar">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" /></figure>
+            <img [src]="_chatService.usuario.photo" /></figure>
     </div>
     <div class="messages">
         <div class="messages-content style-2" id="mensaje-box">
@@ -15,21 +15,14 @@
         <span></span>
       </div> -->
 
-            <!-- <div class="message new">
-        <figure class="avatar">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg">
-        </figure>
-        Hi there, I'm Fabio and you?
-        <div class="timestamp">13:22</div>
-      </div> -->
-
-
-            <div class="message message-personal new mt-3" *ngFor="let chat of _chatService.chats">
+            <div class="message new mt-3" [ngClass]="{'message-personal': _chatService.usuario.uid != chat.uid}" *ngFor="let chat of _chatService.chats">
+                <figure class="avatar" *ngIf="_chatService.usuario.uid == chat.uid">
+                    <img [src]="_chatService.usuario.photo">
+                </figure>
                 <div class=""><b>{{ chat.nombre }}</b></div>
                 {{ chat.mensaje }}
                 <div class="timestamp">{{ chat.fecha | date:'shortTime' }}</div>
             </div>
-
         </div>
 
     </div>

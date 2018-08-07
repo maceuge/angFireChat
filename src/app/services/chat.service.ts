@@ -19,12 +19,14 @@ export class ChatService {
                public afAuth: AngularFireAuth) {
 
        this.afAuth.authState.subscribe( user => {
-         console.log(user);
+         //console.log(user);
          if (!user) {
            return;
          }
          this.usuario.nombre = user.displayName;
          this.usuario.uid = user.uid;
+         this.usuario.email = user.email;
+         this.usuario.photo = user.photoURL;
        });         
 
    }
@@ -33,7 +35,7 @@ export class ChatService {
      this.itemsColecctions = this.afs.collection<Messages>('chats', ref => ref.orderBy('fecha', 'desc').limit(10));
      return this.itemsColecctions.valueChanges().pipe(
                      map( (mensajes: Messages[]) => {
-                       console.log(mensajes);
+                      // console.log(mensajes);
                        
                        this.chats = [];
                        for (let mensaje of mensajes) {
@@ -46,15 +48,20 @@ export class ChatService {
 
    addMessage (texto: string) {
     let mensaje: Messages = {
-        nombre: 'Demo',
+        nombre: this.usuario.nombre,
         mensaje: texto,
-        fecha: new Date().getTime()
+        fecha: new Date().getTime(),
+        uid: this.usuario.uid
       };
       return this.itemsColecctions.add(mensaje);
    }
 
-   login() {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+   login(custom: string) {
+     if (custom === 'google') {
+      this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+     } else {
+      this.afAuth.auth.signInWithPopup(new auth.GithubAuthProvider());
+     }
   }
   logout() {
     this.usuario = {};

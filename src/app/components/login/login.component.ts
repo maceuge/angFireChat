@@ -14,14 +14,7 @@ export class LoginComponent implements OnInit {
   }
 
   ingresar (custom: string) {
-
-    if (custom === 'google') {
-      this.chatSrv.login();
-    } else {
-      console.log('Tweeter segui participando!');
-    }
-
-
+      this.chatSrv.login(custom);
   }
 
 
